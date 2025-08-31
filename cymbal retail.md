@@ -60,8 +60,28 @@ graph TD
     N -- Call AI Services --> I
     F -- DLP Scan --> P
     G -- DLP Scan --> P
-    Q -- Access Control --> {H, I, J, K, L, O, P, F, G, D}
-    R -- Security Perimeter --> {H, I, J, K, P, F, G}
+
+    %% Expand grouped edges for Q (IAM)
+    Q -- Access Control --> H
+    Q -- Access Control --> I
+    Q -- Access Control --> J
+    Q -- Access Control --> K
+    Q -- Access Control --> L
+    Q -- Access Control --> O
+    Q -- Access Control --> P
+    Q -- Access Control --> F
+    Q -- Access Control --> G
+    Q -- Access Control --> D
+
+    %% Expand grouped edges for R (VPC Service Controls)
+    R -- Security Perimeter --> H
+    R -- Security Perimeter --> I
+    R -- Security Perimeter --> J
+    R -- Security Perimeter --> K
+    R -- Security Perimeter --> P
+    R -- Security Perimeter --> F
+    R -- Security Perimeter --> G
+
     O -- Log Analysis --> Q
     O -- Metrics/Alerts --> Q
 
@@ -87,4 +107,4 @@ graph TD
             "5. Monitoring & Security" --> "4. E-commerce Platform"
         end
     end
-'''
+```
