@@ -1,4 +1,4 @@
-'''
+
 graph TD
     %% Define the main components
     subgraph "1. Data Sources"
@@ -94,4 +94,3 @@ graph TD
             "5. Monitoring & Security" --> "4. User-Facing Applications"
         end
     end
-'''
