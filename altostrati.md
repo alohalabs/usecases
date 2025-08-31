@@ -64,8 +64,15 @@ graph TD
     J --> V
     T -- Monitoring Metrics --> T
     U -- Log Data --> U
-    V -- Access Control --> {C, H, J, T, U, W, X}
-    W -- Data Protection --> {C, H}
+    V -- Access Control --> C
+    V -- Access Control --> H
+    V -- Access Control --> J
+    V -- Access Control --> T
+    V -- Access Control --> U
+    V -- Access Control --> W
+    V -- Access Control --> X
+    W -- Data Protection --> C
+    W -- Data Protection --> H
     S -- Auth Data --> R
     S -- Auth Requests --> Q
     X -- GA4/Ad Manager Integration --> Q
