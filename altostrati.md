@@ -1,3 +1,4 @@
+```mermaid
 graph TD
     %% Define the main components and subgraphs
     subgraph "1. Data Sources"
@@ -88,3 +89,4 @@ graph TD
     V -- Security --> W
     W -- DLP --> H
     X -- Marketing Campaigns --> Q
+```
