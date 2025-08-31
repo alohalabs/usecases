@@ -1,42 +1,35 @@
-
 graph TD
-    %% Define the main components
+    %% Define the main components and subgraphs
     subgraph "1. Data Sources"
         direction LR
-        A[Legacy Media Library] -->|Migration| C
-        B[External Data Feeds] -->|Ingestion| D
-        E[User Events] -->|Real-time| F
+        A[Legacy Media Library]
+        B[External Data Feeds]
+        E[User Events]
     end
 
     subgraph "2. Ingestion & Processing"
         direction LR
-        C[Cloud Storage] --> G{Cloud Functions / Cloud Run}
-        B --> G
-        E --> G
-        G --> H[BigQuery]
-        H --> J[Vertex AI]
+        C[Cloud Storage]
+        G{Cloud Functions / Cloud Run}
+        H[BigQuery]
     end
 
     subgraph "3. AI & Analytics"
         direction LR
         J[Vertex AI]
-        J -- Model Garden --> K[GenAI for Content Creation]
-        J -- Prediction --> L[Dynamic Pricing Model]
-        J -- Search for Media --> M[Recommendations/Search]
-        J -- Agent Builder --> N[Chatbot]
-        J -- Fairness Indicators --> O[Bias Monitoring]
-        H --> P[Looker]
+        K[GenAI for Content Creation]
+        L[Dynamic Pricing Model]
+        M[Recommendations/Search]
+        N[Chatbot]
+        O[Bias Monitoring]
+        P[Looker]
     end
 
     subgraph "4. User-Facing Applications"
         direction LR
         Q[Website/Mobile Apps]
-        Q -->|API| M
-        Q -->|API| L
-        Q -->|API| N
-        Q -- GKE --> R[Microservices]
-        R -- Identity Platform --> S[User Auth]
-        S --> Q
+        R[Microservices]
+        S[User Auth]
     end
 
     subgraph "5. Monitoring & Security"
@@ -45,6 +38,7 @@ graph TD
         U[Cloud Logging]
         V[IAM]
         W[Cloud DLP]
+        X[Marketing Platforms]
     end
 
     %% Define the data and control flows
@@ -54,43 +48,43 @@ graph TD
     G -- Processed Data --> H
     H -- Analytics Data --> P
     H -- Training Data --> J
-    J -- Model Inference --> L
-    J -- Recommendations --> M
+    J -- Model Garden --> K
+    J -- Prediction --> L
+    J -- Search for Media --> M
+    J -- Agent Builder --> N
+    J -- Fairness Indicators --> O
     L -- Price API --> R
     M -- Search API --> R
     N -- Chatbot API --> R
     K -- AI Content --> C
-    P -- Insights --> |Marketing| X[Marketing Platforms]
+    P -- Insights --> X
     C --> V
     H --> V
+    J --> V
     T -- Monitoring Metrics --> T
     U -- Log Data --> U
-    V -- Access Control --> {C, H, J, T, U, W}
+    V -- Access Control --> {C, H, J, T, U, W, X}
     W -- Data Protection --> {C, H}
-    X[Marketing Platforms] -- GA4/Ad Manager Integration --> Q
+    S -- Auth Data --> R
+    S -- Auth Requests --> Q
+    X -- GA4/Ad Manager Integration --> Q
     Q -- User Data --> E
 
     %% Connect the layers
-    subgraph "Overall Flow"
-        style Overall Flow fill:#f9f,stroke:#333,stroke-width:2px
-        direction TB
-        subgraph "Data Pipeline"
-            direction LR
-            "1. Data Sources" --> "2. Ingestion & Processing"
-        end
-        subgraph "AI & Analytics Flow"
-            direction LR
-            "2. Ingestion & Processing" --> "3. AI & Analytics"
-        end
-        subgraph "Application Flow"
-            direction LR
-            "3. AI & Analytics" --> "4. User-Facing Applications"
-        end
-        subgraph "Monitoring & Security Flow"
-            direction LR
-            "5. Monitoring & Security" --> "1. Data Sources"
-            "5. Monitoring & Security" --> "2. Ingestion & Processing"
-            "5. Monitoring & Security" --> "3. AI & Analytics"
-            "5. Monitoring & Security" --> "4. User-Facing Applications"
-        end
-    end
+    A -- Content Migration --> C
+    B -- Ingestion --> G
+    E -- Real-time --> G
+    G -- Transformed Data --> H
+    H -- Analytics Data --> P
+    H -- Training Data --> J
+    J -- Model Serving --> Q
+    K -- Generated Content --> C
+    P -- BI --> X
+    Q -- User Interface --> Q
+    R -- API --> Q
+    S -- Authentication --> R
+    T -- Observability --> V
+    U -- Logging --> V
+    V -- Security --> W
+    W -- DLP --> H
+    X -- Marketing Campaigns --> Q
